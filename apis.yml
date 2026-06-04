@@ -1,0 +1,97 @@
+---
+aid: friedrich-alexander-universitat-erlangen-nurnberg
+name: Friedrich-Alexander-Universität Erlangen-Nürnberg
+description: >-
+  Friedrich-Alexander-Universität Erlangen-Nürnberg (FAU) is a public research
+  university in Bavaria, Germany, ranked #224 in the QS World University Rankings
+  2025. FAU does not operate a single consolidated developer portal, but several
+  of its central services expose public, machine-readable interfaces. The
+  University Library's OPEN FAU institutional repository runs on DSpace 7.4 and
+  publishes a browsable REST/HAL API and an OAI-PMH metadata interface, while the
+  FAU CRIS research information system (built on Clarivate Converis) exposes a
+  public web-service path that is access-restricted on FAU's instance. Central IT
+  (RRZE) and the Competence Center for Research Data and Information (CDI) maintain
+  active public GitHub organizations and a self-hosted GitLab.
+type: Index
+position: Consumer
+access: 3rd-Party
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/friedrich-alexander-universitat-erlangen-nurnberg/refs/heads/main/apis.yml
+tags:
+  - Education
+  - Higher Education
+  - University
+  - Research
+  - Open Access
+  - Repository
+  - Library
+  - Germany
+created: '2026-06-03'
+modified: '2026-06-03'
+specificationVersion: '0.19'
+apis:
+  - aid: friedrich-alexander-universitat-erlangen-nurnberg:open-fau-rest
+    name: OPEN FAU DSpace REST API
+    description: >-
+      OPEN FAU is the institutional open-access publication repository of FAU,
+      built on DSpace 7.4. Its REST/HAL API exposes communities, collections,
+      items, bitstreams, discovery/search and browse endpoints for harvesting
+      and integrating repository content. Read access to public content is open;
+      submission and management endpoints require authentication.
+    humanURL: https://ub.fau.de/en/research/open-fau/
+    baseURL: https://open.fau.de/server/api
+    tags: [ Repository, Open Access, DSpace, Research, Library ]
+    properties:
+      - type: Documentation
+        url: https://ub.fau.de/en/research/open-fau/
+  - aid: friedrich-alexander-universitat-erlangen-nurnberg:open-fau-oai
+    name: OPEN FAU OAI-PMH Interface
+    description: >-
+      OAI-PMH metadata harvesting interface for the OPEN FAU DSpace repository,
+      supporting standard verbs (Identify, ListRecords, ListSets,
+      GetRecord) for bulk metadata harvesting of FAU open-access publications.
+      The legacy OPUS FAU OAI endpoint now redirects to OPEN FAU.
+    humanURL: https://ub.fau.de/en/research/open-fau/
+    baseURL: https://open.fau.de/server/oai/request
+    tags: [ OAI-PMH, Metadata Harvesting, Open Access, Repository, Library ]
+    properties:
+      - type: Documentation
+        url: https://ub.fau.de/en/research/open-fau/
+  - aid: friedrich-alexander-universitat-erlangen-nurnberg:cris-converis-ws
+    name: FAU CRIS Converis Public Web Service
+    description: >-
+      FAU CRIS is the university's research information system, built on Clarivate
+      Converis, holding 146,000+ publications and 5,200+ research projects and
+      syndicating data to 1,000+ websites. Converis provides public web-service
+      endpoints under /converis/ws/public for reading info objects; on FAU's
+      instance these paths respond but return HTTP 403 (access-restricted),
+      so programmatic access is gated rather than openly documented.
+    humanURL: https://cris.fau.de/
+    tags: [ Research, CRIS, Converis, Web Service, Restricted ]
+    properties:
+      - type: Documentation
+        url: https://www.fau.eu/research/services-for-researchers/research-information-system/
+common:
+  - type: Website
+    url: https://www.fau.eu/
+  - type: GitHub
+    url: https://github.com/RRZE-Webteam
+  - type: GitHub
+    url: https://github.com/FAU-CDI
+  - type: SourceCode
+    url: https://gitlab.rrze.fau.de/
+  - type: LinkedIn
+    url: https://www.linkedin.com/school/fau-erlangen-n%C3%BCrnberg/
+  - type: Authentication
+    url: https://www.rrze.fau.de/2009/10/zentraler-anmeldedienst-fur-web-anwendungen-mein-campus-stud-on-und-uniportal/
+  - type: Plans
+    url: plans/friedrich-alexander-universitat-erlangen-nurnberg-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/friedrich-alexander-universitat-erlangen-nurnberg-rate-limits.yml
+  - type: FinOps
+    url: finops/friedrich-alexander-universitat-erlangen-nurnberg-finops.yml
+  - type: Review
+    url: review.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

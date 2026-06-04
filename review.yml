@@ -1,0 +1,48 @@
+---
+name: Friedrich-Alexander-Universität Erlangen-Nürnberg
+description: Friedrich-Alexander-Universität Erlangen-Nürnberg public developer/API footprint review for APIs.json cataloging.
+url: https://raw.githubusercontent.com/api-evangelist/friedrich-alexander-universitat-erlangen-nurnberg/refs/heads/main/review.yml
+created: '2026-06-03'
+modified: '2026-06-03'
+reviews:
+  - date: '2026-06-03'
+    rating: 3
+    summary: >-
+      FAU has no single consolidated developer portal, but two public,
+      machine-readable interfaces were verified live: the OPEN FAU DSpace 7.4
+      repository REST/HAL API and its OAI-PMH endpoint. The FAU CRIS Converis
+      research-information web service exists but is access-restricted (HTTP 403).
+      Active public GitHub organizations (RRZE-Webteam, FAU-CDI) and a self-hosted
+      GitLab were confirmed. No fabricated endpoints; all URLs below were probed
+      with curl and HTTP status recorded.
+    endpoints:
+      - url: https://open.fau.de/server/api
+        status: 200
+        note: DSpace 7.4 REST API root with HAL links (communities, items, discover, etc.).
+      - url: https://open.fau.de/server/api/core/items
+        status: 401
+        note: Items collection requires authentication; confirms live REST API.
+      - url: https://open.fau.de/server/oai/request?verb=Identify
+        status: 200
+        note: OPEN FAU OAI-PMH Identify responds with valid OAI-PMH 2.0 XML.
+      - url: https://opus4.kobv.de/opus4-fau/oai?verb=Identify
+        status: 301
+        note: Legacy OPUS FAU OAI endpoint now redirects to open.fau.de (migrated to DSpace).
+      - url: https://cris.fau.de/
+        status: 200
+        note: FAU CRIS Converis research information portal, public web frontend.
+      - url: https://cris.fau.de/converis/ws/public/infoobject/getStartFunding
+        status: 403
+        note: Converis public web-service path exists but is access-restricted on FAU's instance.
+      - url: https://www.fau.eu/
+        status: 200
+        note: Official university website (English/international).
+      - url: https://ub.fau.de/en/research/open-fau/
+        status: 200
+        note: University Library OPEN FAU repository documentation page.
+      - url: https://github.com/RRZE-Webteam
+        status: 200
+        note: RRZE central IT web team GitHub org, ~135 public repositories.
+      - url: https://github.com/FAU-CDI
+        status: 200
+        note: FAU Competence Center Research Data and Information GitHub org, ~27 repositories.

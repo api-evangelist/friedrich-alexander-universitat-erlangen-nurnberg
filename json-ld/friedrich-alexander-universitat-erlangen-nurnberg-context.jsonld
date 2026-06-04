@@ -1,0 +1,70 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "dspace": "https://open.fau.de/server/api/",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "oai": "http://www.openarchives.org/OAI/2.0/",
+    "fau": "https://www.fau.eu/ns#",
+
+    "name": "schema:name",
+    "url": "schema:url",
+    "description": "schema:description",
+    "identifier": "schema:identifier",
+
+    "University": "schema:CollegeOrUniversity",
+    "Repository": "schema:DataCatalog",
+
+    "Item": "schema:CreativeWork",
+    "Collection": "schema:Collection",
+    "Community": "schema:Collection",
+    "Bitstream": "schema:MediaObject",
+
+    "uuid": "schema:identifier",
+    "handle": {
+      "@id": "schema:identifier",
+      "@type": "schema:PropertyValue"
+    },
+    "title": "dc:title",
+    "author": {
+      "@id": "schema:author",
+      "@type": "schema:Person"
+    },
+    "advisor": {
+      "@id": "dc:contributor",
+      "@type": "schema:Person"
+    },
+    "metadata": "schema:additionalProperty",
+    "value": "schema:value",
+    "language": "schema:inLanguage",
+
+    "communities": {
+      "@id": "dspace:core/communities",
+      "@type": "@id"
+    },
+    "collections": {
+      "@id": "dspace:core/collections",
+      "@type": "@id"
+    },
+    "items": {
+      "@id": "dspace:core/items",
+      "@type": "@id"
+    },
+    "bitstreams": {
+      "@id": "dspace:core/bitstreams",
+      "@type": "@id"
+    }
+  },
+  "@type": "University",
+  "name": "Friedrich-Alexander-Universität Erlangen-Nürnberg",
+  "url": "https://www.fau.eu/",
+  "description": "Public research university in Bavaria, Germany. Operates the OPEN FAU DSpace 7.4 institutional repository with a REST/HAL API and OAI-PMH metadata interface, and the FAU CRIS (Converis) research information system.",
+  "subOrganization": [
+    {
+      "@type": "Repository",
+      "name": "OPEN FAU",
+      "url": "https://open.fau.de",
+      "description": "Institutional open-access publication repository built on DSpace 7.4, exposing REST/HAL and OAI-PMH interfaces."
+    }
+  ]
+}

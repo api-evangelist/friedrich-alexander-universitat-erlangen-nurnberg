@@ -1,124 +1,495 @@
 ---
 aid: friedrich-alexander-universitat-erlangen-nurnberg
 name: Friedrich-Alexander-Universität Erlangen-Nürnberg
+x-type: university
+x-category: Public Research University
 description: >-
   Friedrich-Alexander-Universität Erlangen-Nürnberg (FAU) is a public research
-  university in Bavaria, Germany, ranked #224 in the QS World University Rankings
-  2025. FAU does not operate a single consolidated developer portal, but several
-  of its central services expose public, machine-readable interfaces. The
-  University Library's OPEN FAU institutional repository runs on DSpace 7.4 and
-  publishes a browsable REST/HAL API and an OAI-PMH metadata interface, while the
-  FAU CRIS research information system (built on Clarivate Converis) exposes a
-  public web-service path that is access-restricted on FAU's instance. Central IT
-  (RRZE) and the Competence Center for Research Data and Information (CDI) maintain
-  active public GitHub organizations and a self-hosted GitLab.
+  university in Erlangen and Nuremberg, Bavaria, Germany, founded in 1743 and one
+  of Germany's largest, with around 39,000 students across five faculties. FAU
+  operates no central developer portal and publishes no OpenAPI definition of its
+  own — but unlike most of this cohort its programmable footprint is real, and
+  every surface in it runs on FAU's own infrastructure: every host recorded below
+  resolves inside FAU's own 131.188.0.0/16 network, and not one of them CNAMEs to
+  a vendor. The institution-operated, publicly readable surfaces verified live on
+  2026-08-30 are the OPEN FAU institutional repository on DSpace 7.4, which serves
+  both a REST/HAL API and a fully functional OAI-PMH 2.0 harvesting endpoint with
+  eight metadata crosswalks; a Matrix (Synapse 1.159.0) homeserver at
+  matrix.fau.de, correctly delegated from .well-known/matrix/server and
+  .well-known/matrix/client on fau.de, which makes FAU's chat service reachable
+  by any standards-conformant Matrix client; the WordPress REST API behind the
+  RRZE-operated FAU web platform, where the /wp-json index and search route are
+  restricted but the wp/v2 content collections return real JSON on www.fau.de and
+  a complete route index on ub.fau.de; and anonymous read access to the GitLab v4
+  REST API on FAU's self-hosted GitLab at gitlab.rrze.fau.de, which reports 132
+  public projects. Three further surfaces are live but gated: the FAU API gateway
+  at api.fau.de, which fronts an authenticated API router behind SSO; the
+  ClusterCockpit HPC job-monitoring REST API at monitoring.nhr.fau.de, run by
+  NHR@FAU, the national high-performance computing centre FAU hosts; and the
+  Clarivate Converis web service on cris.fau.de, which is FAU's research
+  information system and returns HTTP 403 on its public web-service paths. FAU
+  also operates a SAML 2.0 identity provider registered in the DFN-AAI federation,
+  mints DOIs under its own DataCite prefix 10.25593, and maintains three active
+  public GitHub organisations plus a self-hosted GitLab. No vendor contract is
+  saved in this repository under FAU's name: where the software beneath a surface
+  is someone else's product, the profile says so and keeps no copy of that
+  product's specification.
 type: Index
 deliveryModel:
   model: saas
   open_source: false
-  commercial: true
-  callable_host: false
-  label: Hosted service · you call their endpoint
-  confidence: medium
+  commercial: false
+  callable_host: true
+  label: Hosted service · several open read endpoints on the institution's own hosts
+  confidence: high
   source:
-  - pricing
-  generated: '2026-08-28'
-  method: derived
+  - conformance/friedrich-alexander-universitat-erlangen-nurnberg-conformance.yml
+  generated: '2026-08-30'
+  method: probed
 accessModel:
   pricing: free
-  onboarding: unknown
+  onboarding: none
   trial: false
-  try_now: false
-  public: false
-  label: Free
-  confidence: medium
+  try_now: true
+  public: true
+  label: Free · Open repository, Matrix, WordPress and GitLab reads; FAU API and CRIS are credentialed
+  confidence: high
   source:
-  - plans
-  generated: '2026-07-22'
-  method: derived
+  - conformance/friedrich-alexander-universitat-erlangen-nurnberg-conformance.yml
+  generated: '2026-08-30'
+  method: probed
 position: Consumer
 access: 3rd-Party
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/friedrich-alexander-universitat-erlangen-nurnberg.png
 url: https://raw.githubusercontent.com/api-evangelist/friedrich-alexander-universitat-erlangen-nurnberg/refs/heads/main/apis.yml
 tags:
-  - Education
-  - Higher Education
-  - University
-  - Research
-  - Open Access
-  - Repository
-  - Library
-  - Germany
+- University
+- Higher Education
+- Education
+- Research
+- Research Repository
+- Open Access
+- OAI-PMH
+- Identity Federation
+- Research Computing
+- Matrix
+- Germany
+- Bavaria
+- Europe
 created: '2026-06-03'
-modified: '2026-06-03'
+modified: '2026-08-30'
 specificationVersion: '0.23'
 apis:
-  - aid: friedrich-alexander-universitat-erlangen-nurnberg:open-fau-rest
-    name: OPEN FAU DSpace REST API
-    description: >-
-      OPEN FAU is the institutional open-access publication repository of FAU,
-      built on DSpace 7.4. Its REST/HAL API exposes communities, collections,
-      items, bitstreams, discovery/search and browse endpoints for harvesting
-      and integrating repository content. Read access to public content is open;
-      submission and management endpoints require authentication.
-    humanURL: https://ub.fau.de/en/research/open-fau/
-    baseURL: https://open.fau.de/server/api
-    tags: [ Repository, Open Access, DSpace, Research, Library ]
-    properties:
-      - type: Documentation
-        url: https://ub.fau.de/en/research/open-fau/
-  - aid: friedrich-alexander-universitat-erlangen-nurnberg:open-fau-oai
-    name: OPEN FAU OAI-PMH Interface
-    description: >-
-      OAI-PMH metadata harvesting interface for the OPEN FAU DSpace repository,
-      supporting standard verbs (Identify, ListRecords, ListSets,
-      GetRecord) for bulk metadata harvesting of FAU open-access publications.
-      The legacy OPUS FAU OAI endpoint now redirects to OPEN FAU.
-    humanURL: https://ub.fau.de/en/research/open-fau/
-    baseURL: https://open.fau.de/server/oai/request
-    tags: [ OAI-PMH, Metadata Harvesting, Open Access, Repository, Library ]
-    properties:
-      - type: Documentation
-        url: https://ub.fau.de/en/research/open-fau/
-  - aid: friedrich-alexander-universitat-erlangen-nurnberg:cris-converis-ws
-    name: FAU CRIS Converis Public Web Service
-    description: >-
-      FAU CRIS is the university's research information system, built on Clarivate
-      Converis, holding 146,000+ publications and 5,200+ research projects and
-      syndicating data to 1,000+ websites. Converis provides public web-service
-      endpoints under /converis/ws/public for reading info objects; on FAU's
-      instance these paths respond but return HTTP 403 (access-restricted),
-      so programmatic access is gated rather than openly documented.
-    humanURL: https://cris.fau.de/
-    tags: [ Research, CRIS, Converis, Web Service, Restricted ]
-    properties:
-      - type: Documentation
-        url: https://www.fau.eu/research/services-for-researchers/research-information-system/
-common:
-  - type: VulnerabilityDisclosure
-    url: security/friedrich-alexander-universitat-erlangen-nurnberg-vulnerability-disclosure.yml
-  - type: DomainSecurity
-    url: security/friedrich-alexander-universitat-erlangen-nurnberg-domain-security.yml
-  - type: Website
-    url: https://www.fau.eu/
-  - type: GitHub
-    url: https://github.com/RRZE-Webteam
-  - type: GitHub
-    url: https://github.com/FAU-CDI
-  - type: SourceCode
-    url: https://gitlab.rrze.fau.de/
-  - type: LinkedIn
-    url: https://www.linkedin.com/school/fau-erlangen-n%C3%BCrnberg/
+- aid: friedrich-alexander-universitat-erlangen-nurnberg:open-fau-oai
+  name: OPEN FAU OAI-PMH Metadata Service
+  x-operator: institution
+  description: >-
+    Open Archives Initiative Protocol for Metadata Harvesting 2.0 service for
+    OPEN FAU, the university's open-access publication repository. Verified live
+    on 2026-08-30: Identify returns repositoryName "OPEN FAU", baseURL
+    https://open.fau.de/server/oai/request, adminEmail stelica.valianos@fau.de,
+    deletedRecord transient and an earliest datestamp of 1998-12-31.
+    ListMetadataFormats offers eight prefixes — oai_dc, qdc, mods, didl, ore,
+    mets, marc and dim — and ListRecords returns real Dublin Core carrying both
+    German URN:NBN national identifiers and DOIs under FAU's own DataCite prefix.
+    The repository software is DSpace 7.4, but the endpoint runs on FAU's own
+    registrable domain, is administered from an fau.de address and names OPEN FAU
+    as the repository, so operating it is an institutional act and the surface is
+    credited to FAU. The legacy OPUS FAU endpoint at opus4.kobv.de redirects here.
+  humanURL: https://ub.fau.de/en/research/open-fau/
+  baseURL: https://open.fau.de/server/oai/request
+  tags:
+  - Repository
+  - OAI-PMH
+  - Metadata Harvesting
+  - Open Access
+  - Library
+  properties:
+  - type: Documentation
+    url: https://ub.fau.de/en/research/open-fau/
+  - type: x-conformance
+    url: conformance/friedrich-alexander-universitat-erlangen-nurnberg-conformance.yml
+- aid: friedrich-alexander-universitat-erlangen-nurnberg:open-fau-rest
+  name: OPEN FAU DSpace REST API
+  x-operator: institution
+  description: >-
+    The REST/HAL API of OPEN FAU, FAU's DSpace 7.4 institutional repository, run
+    by the University Library on FAU's own host. Verified live on 2026-08-30: the
+    API root at /server/api returns dspaceName "OPEN FAU", dspaceVersion "DSpace
+    7.4" and the HAL link set; /server/api/core/communities returns the real
+    faculty community tree; /server/api/discover/search/objects answers discovery
+    queries anonymously; /server/api/authn/status returns authenticated=false for
+    an anonymous caller. Only /server/api/core/items requires a session (HTTP
+    401). The CONTRACT here is DSpace's, not FAU's — it is the same REST contract
+    every DSpace 7 site serves — so no specification is saved in this repository;
+    what is credited to FAU is operating the deployment and leaving read access
+    open. Note that open.fau.de sits behind an Anubis bot check on some paths: a
+    request for /llms.txt returns HTTP 200 carrying a challenge page, which is a
+    soft-200 and not a machine-readable file.
+  humanURL: https://ub.fau.de/en/research/open-fau/
+  baseURL: https://open.fau.de/server/api
+  tags:
+  - Repository
+  - DSpace
+  - Open Access
+  - Research
+  - Library
+  properties:
+  - type: Documentation
+    url: https://ub.fau.de/en/research/open-fau/
   - type: Authentication
+    url: https://open.fau.de/server/api/authn/status
+- aid: friedrich-alexander-universitat-erlangen-nurnberg:matrix-homeserver
+  name: FAU Matrix Homeserver
+  x-operator: institution
+  description: >-
+    FAU operates a Matrix homeserver — Synapse 1.159.0 at matrix.fau.de — with a
+    hosted Element web client at chat.fau.de. It is properly delegated: both
+    https://fau.de/.well-known/matrix/client and
+    https://www.fau.de/.well-known/matrix/server return the standard delegation
+    documents pointing at matrix.fau.de, so any conformant Matrix client can
+    discover the service from the university's apex domain. Verified live on
+    2026-08-30: /_matrix/client/versions advertises r0.0.1 through v1.12,
+    /_matrix/federation/v1/version identifies Synapse 1.159.0, and
+    /_matrix/client/v3/login lists m.login.sso with a single identity provider
+    named "FAU IdM" (Keycloak/OIDC) alongside m.login.token. This is an open
+    standard implemented on the institution's own infrastructure and federated
+    into the wider Matrix network — the most genuinely programmable, and least
+    catalogued, surface FAU runs.
+  humanURL: https://www.anleitungen.rrze.fau.de/internet-zugang/matrix/
+  baseURL: https://matrix.fau.de/_matrix/client/versions
+  tags:
+  - Matrix
+  - Messaging
+  - Federation
+  - Campus Life
+  - Open Standard
+  properties:
+  - type: Documentation
+    url: https://www.anleitungen.rrze.fau.de/internet-zugang/matrix/
+  - type: Discovery
+    url: https://www.fau.de/.well-known/matrix/client
+- aid: friedrich-alexander-universitat-erlangen-nurnberg:websso-saml
+  name: FAU WebSSO SAML 2.0 Identity Provider
+  x-operator: institution
+  description: >-
+    FAU's central web single sign-on, operated by RRZE, publishes SAML 2.0
+    identity provider metadata as a machine-readable document at
+    https://www.sso.uni-erlangen.de/simplesaml/saml2/idp/metadata.php, mirrored on
+    sso.fau.de. Verified live on 2026-08-30: a signed md:EntityDescriptor with an
+    md:IDPSSODescriptor and the mdui and shibmd extension namespaces. The same
+    entityID resolves in the DFN-AAI metadata query service at mdq.aai.dfn.de,
+    confirming registration in the German national research and education
+    federation, which feeds eduGAIN. The implementation is SimpleSAMLphp. Identity
+    federation is institution-operated by definition and is one of the few
+    machine-readable surfaces a university reliably owns outright.
+  humanURL: https://www.sso.uni-erlangen.de/
+  baseURL: https://www.sso.uni-erlangen.de/simplesaml/saml2/idp/metadata.php
+  tags:
+  - Identity Federation
+  - SAML
+  - DFN-AAI
+  - eduGAIN
+  - Single Sign-On
+  properties:
+  - type: Documentation
     url: https://www.rrze.fau.de/2009/10/zentraler-anmeldedienst-fur-web-anwendungen-mein-campus-stud-on-und-uniportal/
-  - type: Plans
-    url: plans/friedrich-alexander-universitat-erlangen-nurnberg-plans-pricing.yml
-  - type: RateLimits
-    url: rate-limits/friedrich-alexander-universitat-erlangen-nurnberg-rate-limits.yml
-  - type: FinOps
-    url: finops/friedrich-alexander-universitat-erlangen-nurnberg-finops.yml
-  - type: Review
-    url: review.yml
+  - type: x-conformance
+    url: conformance/friedrich-alexander-universitat-erlangen-nurnberg-conformance.yml
+- aid: friedrich-alexander-universitat-erlangen-nurnberg:wordpress-rest
+  name: FAU Web Platform WordPress REST API
+  x-operator: institution
+  description: >-
+    FAU's central web platform is a WordPress estate run by the RRZE Webteam, and
+    its REST API is partly open to anonymous callers. Verified live on 2026-08-30:
+    https://www.fau.de/wp-json/wp/v2/posts returns real post JSON, and
+    https://ub.fau.de/wp-json/ returns the complete route index for the University
+    Library site — 364 routes across 20 namespaces, including the RRZE Webteam's
+    own plugin namespaces rrze-elements-blocks/v1 and rrze-video/v1, whose source
+    lives in the public github.com/RRZE-Webteam organisation. The /wp-json/ index
+    and the wp/v2/search route are deliberately restricted on the main sites
+    ("Die Unterstützung der REST-API ist eingeschränkt", HTTP 403), so this is a
+    partly-closed deployment rather than an open content API programme. The
+    contract is WordPress core's; what is FAU's is the deployment, the decision to
+    leave the content collections readable, and the RRZE-authored namespaces.
+    Also present and NOT open: ub.fau.de exposes wp-abilities/v1 and an mcp
+    namespace with three MCP servers registered by plugins, every route of which
+    returns HTTP 401 rest_forbidden to an anonymous caller. It is recorded here so
+    a later pass does not mistake it for a public MCP surface.
+  humanURL: https://www.rrze.fau.de/
+  baseURL: https://www.fau.de/wp-json/wp/v2/posts
+  tags:
+  - Content
+  - WordPress
+  - REST
+  - Web Platform
+  properties:
+  - type: Documentation
+    url: https://www.rrze.fau.de/
+  - type: SourceCode
+    url: https://github.com/RRZE-Webteam
+- aid: friedrich-alexander-universitat-erlangen-nurnberg:gitlab-api
+  name: RRZE GitLab REST API (FAU self-hosted)
+  x-operator: institution
+  description: >-
+    RRZE runs FAU's self-hosted GitLab at gitlab.rrze.fau.de, and its v4 REST API
+    answers anonymous reads. Verified live on 2026-08-30:
+    /api/v4/projects?per_page=1 returns HTTP 200 with real project JSON and an
+    x-total header of 132 public projects; /api/v4/version returns HTTP 401, which
+    is GitLab's normal posture for that route. The API contract is GitLab's
+    product contract and no copy of it is kept here; the institutional fact is
+    that FAU operates the instance on its own domain and leaves public project
+    metadata readable without a token.
+  humanURL: https://gitlab.rrze.fau.de/
+  baseURL: https://gitlab.rrze.fau.de/api/v4/projects
+  tags:
+  - Source Code
+  - GitLab
+  - Developer Infrastructure
+  properties:
+  - type: Documentation
+    url: https://gitlab.rrze.fau.de/
+- aid: friedrich-alexander-universitat-erlangen-nurnberg:fau-api-gateway
+  name: FAU API Gateway (api.fau.de)
+  x-operator: institution
+  description: >-
+    api.fau.de is an FAU-operated API portal — the browser title is "FAU API", the
+    single-page application is served from FAU's own network, and its footer links
+    to rrze.fau.de and www.fau.de. It is gated: the application authenticates
+    through /home/auth and /login/sso, and it talks to an Apollo GraphQL client.
+    Behind the SPA there is a real API router, which is provable without any
+    credential — a request to /pub/v1/persons returns
+    {"error":"Calling unknown API: [controller:pub, api_name:persons,
+    action:index, api_version:v1]"}, exposing a controller / version / api-name /
+    action routing scheme, while unrelated paths fall through to the SPA shell
+    with HTTP 200. No API catalogue, no OpenAPI, and no public documentation of
+    this gateway was reachable, so nothing is credited beyond its existence: this
+    is a live but undocumented, credentialed institutional API surface. The
+    /doc, /graphql and /openapi.json paths all return the SPA shell, which is a
+    soft-200 and not a specification.
+  humanURL: https://api.fau.de/
+  baseURL: https://api.fau.de/
+  tags:
+  - API Gateway
+  - Restricted
+  - GraphQL
+  - Single Sign-On
+  properties:
+  - type: Documentation
+    url: https://www.rrze.fau.de/
+  - type: Authentication
+    url: https://sso.fau.de/
+- aid: friedrich-alexander-universitat-erlangen-nurnberg:clustercockpit-nhr
+  name: NHR@FAU ClusterCockpit Job Monitoring API
+  x-operator: institution
+  description: >-
+    NHR@FAU — the Erlangen National High Performance Computing Center, hosted by
+    FAU — runs ClusterCockpit at monitoring.nhr.fau.de as the job-specific
+    performance monitoring service for its clusters, alongside an HPC portal at
+    portal.hpc.fau.de and documentation at doc.nhr.fau.de. Verified live on
+    2026-08-30: https://monitoring.nhr.fau.de/api/jobs/ returns HTTP 401 with the
+    JSON body {"error":"no user for secured check","status":"Unauthorized"} — a
+    real REST API answering, not a web page. ClusterCockpit is MIT-licensed
+    software with its own published REST and GraphQL contract at
+    github.com/ClusterCockpit; that product specification is NOT saved in this
+    repository, because it is a multi-site product spec and saving it here would
+    inflate FAU's apparent footprint with a document other HPC centres also run.
+    What is recorded is the institutional fact: FAU operates a credentialed
+    research-computing API for its national HPC users.
+  humanURL: https://hpc.fau.de/
+  baseURL: https://monitoring.nhr.fau.de/api/jobs/
+  tags:
+  - Research Computing
+  - HPC
+  - Monitoring
+  - Restricted
+  properties:
+  - type: Documentation
+    url: https://doc.nhr.fau.de/
+  - type: SourceCode
+    url: https://github.com/ClusterCockpit/cc-backend
+- aid: friedrich-alexander-universitat-erlangen-nurnberg:cris-converis-ws
+  name: Clarivate Converis Web Service — FAU CRIS deployment
+  x-operator: tenant
+  description: >-
+    FAU CRIS is the university's research information system, holding 146,000+
+    publications and 5,200+ projects and syndicating data to more than a thousand
+    FAU websites. The data is FAU's; the CONTRACT is not. The system is Clarivate
+    Converis, and the /converis/ws/public/... web-service paths it exposes are a
+    Converis product feature shipped to every Converis customer. Verified live on
+    2026-08-30: https://cris.fau.de/ returns HTTP 200 and
+    https://cris.fau.de/converis/ws/public/infoobject/getStartFunding returns HTTP
+    403 — the path exists but is access-restricted on FAU's instance. The host
+    resolves inside FAU's own network, so the deployment is self-hosted, but the
+    surface is recorded as a tenant relationship and no Clarivate specification is
+    saved under FAU's name. That is the misattribution this pipeline exists to
+    prevent.
+  humanURL: https://cris.fau.de/
+  baseURL: https://cris.fau.de/converis/ws/public
+  tags:
+  - Research Information
+  - CRIS
+  - Converis
+  - Vendor Contract
+  - Restricted
+  properties:
+  - type: Documentation
+    url: https://www.fau.eu/research/services-for-researchers/research-information-system/
+common:
+- type: Website
+  url: https://www.fau.de/
+- type: Website
+  url: https://www.fau.eu/
+- type: ResearchRepository
+  url: https://ub.fau.de/en/research/open-fau/
+- type: ResearchRepository
+  url: https://cris.fau.de/
+- type: IdentityFederation
+  url: https://www.sso.uni-erlangen.de/simplesaml/saml2/idp/metadata.php
+- type: ResearchComputing
+  url: https://hpc.fau.de/
+- type: Documentation
+  url: https://doc.nhr.fau.de/
+- type: CourseCatalog
+  url: https://www.campo.fau.de/
+- type: LibraryCatalog
+  url: https://ub.fau.de/
+- type: OpenData
+  url: https://open.fau.de/
+- type: GitHub
+  url: https://github.com/RRZE-Webteam
+- type: GitHub
+  url: https://github.com/FAU-CDI
+- type: GitHub
+  url: https://github.com/RRZE-HPC
+- type: SourceCode
+  url: https://gitlab.rrze.fau.de/
+- type: Authentication
+  url: https://sso.fau.de/
+- type: Portal
+  url: https://www.sso.uni-erlangen.de/
+- type: SecurityTxt
+  url: https://www.fau.de/.well-known/security.txt
+- type: PrivacyPolicy
+  url: https://www.fau.de/datenschutz/
+- type: TermsOfService
+  url: https://www.fau.de/impressum/
+- type: Support
+  url: https://www.rrze.fau.de/
+- type: x-conformance
+  url: conformance/friedrich-alexander-universitat-erlangen-nurnberg-conformance.yml
+- type: VulnerabilityDisclosure
+  url: security/friedrich-alexander-universitat-erlangen-nurnberg-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/friedrich-alexander-universitat-erlangen-nurnberg-domain-security.yml
+- type: Plans
+  url: plans/friedrich-alexander-universitat-erlangen-nurnberg-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/friedrich-alexander-universitat-erlangen-nurnberg-rate-limits.yml
+- type: FinOps
+  url: finops/friedrich-alexander-universitat-erlangen-nurnberg-finops.yml
+- type: Review
+  url: review.yml
+x-coverage:
+  state: covered
+  reason: covered
+  generated: '2026-08-30'
+  method: probed
+  detail: >-
+    Every surface class the university pipeline hunts was probed on 2026-08-30 and
+    FAU comes out well above this cohort's norm: it operates several genuinely
+    institution-run machine-readable surfaces rather than the usual single vendor
+    contract. Four are open to anonymous callers — the OPEN FAU DSpace REST and
+    OAI-PMH endpoints, the Matrix homeserver at matrix.fau.de with correct
+    .well-known delegation from the apex domain, the WordPress wp/v2 content
+    collections, and anonymous project reads on the self-hosted GitLab. Three more
+    are live but credentialed: the api.fau.de gateway, ClusterCockpit at
+    monitoring.nhr.fau.de, and the Converis web service on cris.fau.de. Identity
+    federation is real and confirmed twice — FAU's SAML metadata document and its
+    registration in the DFN-AAI MDQ service. DOI minting is real: prefix 10.25593
+    is registered with DataCite and resolves into OPEN FAU. What is absent is
+    equally clear. There is no open-data portal: data.fau.de is a Leaflet map of
+    partner universities, not CKAN or Socrata, and opendata.fau.de and rdm.fau.de
+    do not resolve. There is no course-catalogue API — campo.fau.de is HISinOne, a
+    web application, and UnivIS was withdrawn from public access on 2025-05-15 and
+    now serves an "Internal Use Only" page. faudir.fau.de, the successor
+    directory, has an /api/e1/ AJAX surface that returns an empty object for every
+    resource path and is not a documented API. No llms.txt exists on www.fau.de
+    (404) and open.fau.de answers that path with an Anubis bot-challenge page
+    under HTTP 200. No OpenAPI, AsyncAPI or apis.json document authored by FAU was
+    found anywhere, which is why this repository still holds no openapi/ directory:
+    the surfaces are real, the specifications for them belong to DSpace, Matrix,
+    WordPress, GitLab, ClusterCockpit and Clarivate, and none of those is saved
+    here under FAU's name. This profile previously listed three surfaces; it now
+    lists nine, all operator-attributed, and adds three verified domain-standard
+    conformances (oai-pmh, saml, datacite).
+  evidence:
+  - url: https://open.fau.de/server/oai/request?verb=Identify
+    status: 200
+  - url: https://open.fau.de/server/oai/request?verb=ListMetadataFormats
+    status: 200
+  - url: https://open.fau.de/server/api
+    status: 200
+  - url: https://open.fau.de/server/api/core/communities
+    status: 200
+  - url: https://open.fau.de/server/api/discover/search/objects
+    status: 200
+  - url: https://open.fau.de/server/api/authn/status
+    status: 200
+  - url: https://open.fau.de/llms.txt
+    status: 200
+  - url: https://matrix.fau.de/_matrix/client/versions
+    status: 200
+  - url: https://matrix.fau.de/_matrix/federation/v1/version
+    status: 200
+  - url: https://matrix.fau.de/_matrix/client/v3/login
+    status: 200
+  - url: https://www.fau.de/.well-known/matrix/client
+    status: 200
+  - url: https://www.fau.de/.well-known/matrix/server
+    status: 200
+  - url: https://www.sso.uni-erlangen.de/simplesaml/saml2/idp/metadata.php
+    status: 200
+  - url: https://mdq.aai.dfn.de/entities/https%3A%2F%2Fwww.sso.uni-erlangen.de%2Fsimplesaml%2Fsaml2%2Fidp%2Fmetadata.php
+    status: 200
+  - url: https://www.fau.de/wp-json/wp/v2/posts?per_page=1
+    status: 200
+  - url: https://ub.fau.de/wp-json/
+    status: 200
+  - url: https://www.fau.de/wp-json/
+    status: 403
+  - url: https://ub.fau.de/wp-json/mcp/mcp-adapter-default-server
+    status: 401
+  - url: https://gitlab.rrze.fau.de/api/v4/projects?per_page=1
+    status: 200
+  - url: https://api.fau.de/
+    status: 200
+  - url: https://api.fau.de/pub/v1/persons
+    status: 404
+  - url: https://monitoring.nhr.fau.de/api/jobs/
+    status: 401
+  - url: https://portal.hpc.fau.de/ui
+    status: 200
+  - url: https://doc.nhr.fau.de/
+    status: 200
+  - url: https://cris.fau.de/converis/ws/public/infoobject/getStartFunding
+    status: 403
+  - url: https://doi.org/ra/10.25593
+    status: 200
+  - url: https://doi.org/10.25593/978-3-96147-370-0
+    status: 200
+  - url: https://www.fau.de/.well-known/security.txt
+    status: 200
+  - url: https://www.fau.de/llms.txt
+    status: 404
+  - url: https://univis.uni-erlangen.de/prg
+    status: 200
+  - url: https://data.fau.de/
+    status: 200
+  - url: https://www.fau.de/datenschutz/
+    status: 200
+  - url: https://www.fau.de/impressum/
+    status: 200
 maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- FN: Kin Lane
+  email: kin@apievangelist.com

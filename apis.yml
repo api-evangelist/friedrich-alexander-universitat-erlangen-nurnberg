@@ -336,6 +336,9 @@ apis:
   - type: Documentation
     url: https://www.fau.eu/research/services-for-researchers/research-information-system/
 common:
+- type: License
+  name: MIT
+  url: https://github.com/ClusterCockpit/cc-backend/blob/main/LICENSE
 - type: Website
   url: https://www.fau.de/
 - type: Website

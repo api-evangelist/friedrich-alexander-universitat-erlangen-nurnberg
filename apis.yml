@@ -58,7 +58,7 @@ accessModel:
   - conformance/friedrich-alexander-universitat-erlangen-nurnberg-conformance.yml
   generated: '2026-08-30'
   method: probed
-position: Consumer
+position: Consuming
 access: 3rd-Party
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/friedrich-alexander-universitat-erlangen-nurnberg.png
 url: https://raw.githubusercontent.com/api-evangelist/friedrich-alexander-universitat-erlangen-nurnberg/refs/heads/main/apis.yml

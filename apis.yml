@@ -190,6 +190,12 @@ apis:
   - SAML
   - DFN-AAI
   - eduGAIN
+  - SSO
+  tags_raw:
+  - Identity Federation
+  - SAML
+  - DFN-AAI
+  - eduGAIN
   - Single Sign-On
   properties:
   - type: Documentation
@@ -273,6 +279,11 @@ apis:
   - API Gateway
   - Restricted
   - GraphQL
+  - SSO
+  tags_raw:
+  - API Gateway
+  - Restricted
+  - GraphQL
   - Single Sign-On
   properties:
   - type: Documentation
@@ -327,6 +338,12 @@ apis:
   humanURL: https://cris.fau.de/
   baseURL: https://cris.fau.de/converis/ws/public
   tags:
+  - Research Information
+  - CRI
+  - Converis
+  - Vendor Contract
+  - Restricted
+  tags_raw:
   - Research Information
   - CRIS
   - Converis

@@ -1,0 +1,139 @@
+---
+# authorship: written by API Evangelist tooling during the university pipeline
+# run of 2026-08-30. Every claim below was probed live from a public network
+# position with a browser User-Agent; nothing is inferred from a prose statement
+# on an FAU web page, and nothing is carried over from the June 2026 profile.
+generated: '2026-08-30'
+method: probed
+source: >-
+  Live probes of https://open.fau.de/server/oai/request (OAI-PMH verbs Identify,
+  ListMetadataFormats, ListRecords), of the FAU WebSSO SAML 2.0 identity provider
+  metadata at https://www.sso.uni-erlangen.de/simplesaml/saml2/idp/metadata.php,
+  of the DFN-AAI federation metadata query service at https://mdq.aai.dfn.de/,
+  and of the DOI registration agency lookup at https://doi.org/ra/10.25593.
+provider: Friedrich-Alexander-Universität Erlangen-Nürnberg
+providerId: friedrich-alexander-universitat-erlangen-nurnberg
+regime: education
+description: >-
+  Domain-standard conformance for Friedrich-Alexander-Universität
+  Erlangen-Nürnberg, measured against the Kin Score `education` regulatory regime.
+  Only standards for which a machine-readable surface on an FAU-operated host
+  returned real evidence are recorded. Reward-only: a standard absent here was
+  either not found or not verifiable, never assumed. The Clarivate Converis web
+  service on cris.fau.de is deliberately NOT counted, because the contract is
+  Clarivate's product contract even though FAU runs the deployment.
+
+conformance:
+
+- standard: oai-pmh
+  name: Open Archives Initiative Protocol for Metadata Harvesting 2.0
+  status: conformant
+  operator: institution
+  evidence:
+    location: https://open.fau.de/server/oai/request?verb=Identify
+    status: 200
+    detail: >-
+      Returns a valid OAI-PMH 2.0 Identify response declaring repositoryName
+      "OPEN FAU", baseURL https://open.fau.de/server/oai/request,
+      protocolVersion 2.0, adminEmail stelica.valianos@fau.de, deletedRecord
+      transient, granularity YYYY-MM-DDThh:mm:ssZ and earliestDatestamp
+      1998-12-31T23:00:00Z.
+  supporting:
+  - location: https://open.fau.de/server/oai/request?verb=ListMetadataFormats
+    status: 200
+    detail: >-
+      Eight metadata prefixes are offered — oai_dc, qdc, mods, didl, ore, mets,
+      marc and dim — which is the full DSpace 7 crosswalk set rather than the
+      oai_dc minimum.
+  - location: 'https://open.fau.de/server/oai/request?verb=ListRecords&metadataPrefix=oai_dc'
+    status: 200
+    detail: >-
+      Real Dublin Core records are returned, carrying both URN:NBN national
+      identifiers (urn:nbn:de:bvb:29-opus-…) and DOIs. Harvesting is genuinely
+      functional, not merely advertised.
+  note: >-
+    The repository software beneath is DSpace 7.4, but the harvesting endpoint
+    runs on FAU's own registrable domain, is administered from an fau.de
+    address, and names OPEN FAU as the repository. Operating an OAI-PMH service
+    is an institutional act, so this conformance is credited to FAU.
+
+- standard: saml
+  name: SAML 2.0 identity provider metadata (DFN-AAI / eduGAIN)
+  status: conformant
+  operator: institution
+  evidence:
+    location: https://www.sso.uni-erlangen.de/simplesaml/saml2/idp/metadata.php
+    status: 200
+    detail: >-
+      Returns a signed SAML 2.0 md:EntityDescriptor with an md:IDPSSODescriptor,
+      entityID https://www.sso.uni-erlangen.de/simplesaml/saml2/idp/metadata.php,
+      and the mdui and shibmd metadata extension namespaces declared. This is FAU
+      WebSSO, operated by RRZE, FAU's central IT service provider.
+  supporting:
+  - location: https://mdq.aai.dfn.de/entities/https%3A%2F%2Fwww.sso.uni-erlangen.de%2Fsimplesaml%2Fsaml2%2Fidp%2Fmetadata.php
+    status: 200
+    detail: >-
+      The same entityID resolves in the DFN-AAI metadata query (MDQ) service,
+      confirming that FAU's identity provider is a registered member of the German
+      national research and education federation, which in turn feeds eduGAIN.
+  - location: https://sso.fau.de/simplesaml/saml2/idp/metadata.php
+    status: 200
+    detail: >-
+      The same metadata document is served from the sso.fau.de alias, and the
+      login surface identifies itself as "WebSSO FAU" operated by RRZE.
+  note: >-
+    Identity federation is machine-readable, institution-operated by definition,
+    and almost never catalogued. FAU's IdP runs SimpleSAMLphp; `shibboleth` is
+    NOT claimed here, because the software is not Shibboleth even though DFN-AAI
+    is a Shibboleth-derived federation.
+
+- standard: datacite
+  name: DataCite DOI registration
+  status: conformant
+  operator: institution
+  evidence:
+    location: https://doi.org/ra/10.25593
+    status: 200
+    detail: >-
+      The DOI registration agency lookup returns {"DOI":"10.25593","RA":"DataCite"}.
+      10.25593 is the prefix FAU mints under for FAU University Press and OPEN FAU
+      content, so FAU is a DataCite-registering institution rather than merely a
+      consumer of other people's DOIs.
+  supporting:
+  - location: https://doi.org/10.25593/978-3-96147-370-0
+    status: 200
+    detail: >-
+      A sample DOI under the FAU prefix resolves to https://open.fau.de/handle/openfau/15031,
+      confirming the prefix is bound to FAU's own repository and not to a vendor landing page.
+  - location: 'https://open.fau.de/server/oai/request?verb=ListRecords&metadataPrefix=oai_dc'
+    status: 200
+    detail: DOIs under the FAU prefix appear inline in harvested Dublin Core records.
+
+not_conformant:
+- standard: scim
+  detail: No SCIM 2.0 service provider configuration was reachable on any FAU host probed.
+- standard: lti
+  detail: >-
+    StudOn (ILIAS) at www.studon.fau.de is FAU's learning platform and ILIAS supports LTI,
+    but no LTI registration, platform configuration or dynamic-registration document is
+    publicly reachable, so no conformance is claimed.
+- standard: oneroster
+  detail: No OneRoster endpoint found.
+- standard: ed-fi
+  detail: Ed-Fi is a US K-12/state-longitudinal standard; not applicable to a German university, and none found.
+- standard: caliper
+  detail: No Caliper Analytics event store or sensor endpoint found.
+- standard: qti
+  detail: No public QTI item bank or assessment endpoint found.
+- standard: shibboleth
+  detail: >-
+    FAU's identity provider is SimpleSAMLphp, not Shibboleth. SAML 2.0 conformance is claimed
+    above on verified metadata; Shibboleth specifically is not, because the evidence does not
+    support it.
+- standard: orcid
+  detail: >-
+    No ORCID iDs were observed inline in OPEN FAU's OAI-PMH oai_dc output, and the FAU CRIS
+    Converis web service that would carry them returns HTTP 403. FAU almost certainly holds
+    ORCID data; it is not publicly readable, so it is not claimed.
+- standard: crossref
+  detail: FAU's own DOI prefix 10.25593 is registered with DataCite, not Crossref.

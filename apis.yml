@@ -62,6 +62,9 @@ position: Consuming
 access: 3rd-Party
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/friedrich-alexander-universitat-erlangen-nurnberg.png
 url: https://raw.githubusercontent.com/api-evangelist/friedrich-alexander-universitat-erlangen-nurnberg/refs/heads/main/apis.yml
+x-docs-platform: mkdocs
+x-docs-platform-confidence: medium
+x-docs-platform-checked: 2026-10-03
 tags:
 - University
 - Higher Education
@@ -202,38 +205,20 @@ apis:
     url: https://www.rrze.fau.de/2009/10/zentraler-anmeldedienst-fur-web-anwendungen-mein-campus-stud-on-und-uniportal/
   - type: x-conformance
     url: conformance/friedrich-alexander-universitat-erlangen-nurnberg-conformance.yml
-- aid: friedrich-alexander-universitat-erlangen-nurnberg:wordpress-rest
-  name: FAU Web Platform WordPress REST API
-  x-operator: institution
-  description: >-
-    FAU's central web platform is a WordPress estate run by the RRZE Webteam, and
-    its REST API is partly open to anonymous callers. Verified live on 2026-08-30:
-    https://www.fau.de/wp-json/wp/v2/posts returns real post JSON, and
-    https://ub.fau.de/wp-json/ returns the complete route index for the University
-    Library site — 364 routes across 20 namespaces, including the RRZE Webteam's
-    own plugin namespaces rrze-elements-blocks/v1 and rrze-video/v1, whose source
-    lives in the public github.com/RRZE-Webteam organisation. The /wp-json/ index
-    and the wp/v2/search route are deliberately restricted on the main sites
-    ("Die Unterstützung der REST-API ist eingeschränkt", HTTP 403), so this is a
-    partly-closed deployment rather than an open content API programme. The
-    contract is WordPress core's; what is FAU's is the deployment, the decision to
-    leave the content collections readable, and the RRZE-authored namespaces.
-    Also present and NOT open: ub.fau.de exposes wp-abilities/v1 and an mcp
-    namespace with three MCP servers registered by plugins, every route of which
-    returns HTTP 401 rest_forbidden to an anonymous caller. It is recorded here so
-    a later pass does not mistake it for a public MCP surface.
-  humanURL: https://www.rrze.fau.de/
-  baseURL: https://www.fau.de/wp-json/wp/v2/posts
+- aid: friedrich-alexander-universitat-erlangen-nurnberg:fau-de-website-wordpress-rest
+  name: Friedrich-Alexander-Universität Erlangen-Nürnberg Website (WordPress REST)
+  description: 'The public WordPress REST API (wp-json) of the Friedrich-Alexander-Universität Erlangen-Nürnberg
+    website at www.fau.de: the route index of the site''s content management system, catalogued as one
+    site surface rather than as separate APIs.'
+  baseURL: https://www.fau.de/wp-json
   tags:
-  - Content
   - WordPress
-  - REST
-  - Web Platform
+  x-surface: platform-generated
   properties:
   - type: Documentation
-    url: https://www.rrze.fau.de/
-  - type: SourceCode
-    url: https://github.com/RRZE-Webteam
+    url: https://www.fau.de/wp-json
+  x-platform: wordpress
+  x-platform-surface: rest
 - aid: friedrich-alexander-universitat-erlangen-nurnberg:gitlab-api
   name: RRZE GitLab REST API (FAU self-hosted)
   x-operator: institution

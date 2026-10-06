@@ -80,7 +80,7 @@ tags:
 - Bavaria
 - Europe
 created: '2026-06-03'
-modified: '2026-08-30'
+modified: '2026-10-06'
 specificationVersion: '0.23'
 apis:
 - aid: friedrich-alexander-universitat-erlangen-nurnberg:open-fau-oai
@@ -338,6 +338,8 @@ apis:
   - type: Documentation
     url: https://www.fau.eu/research/services-for-researchers/research-information-system/
 common:
+- url: https://www.fau.de/feed/
+  type: BlogRSS
 - type: License
   name: MIT
   url: https://github.com/ClusterCockpit/cc-backend/blob/main/LICENSE
